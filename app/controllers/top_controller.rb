@@ -8,7 +8,7 @@ class TopController < ApplicationController
   end
   
   def login
-    if params[:uid]=User.find_by(uid: params[:uid]) and params[:pass]=User.find_by(pass: params[:pass])
+    if User.authenticate(params[:uid],params[:pass])
       session[:login_uid]=params[:uid]
       redirect_to root_path
     else
@@ -16,8 +16,8 @@ class TopController < ApplicationController
     end
   end
   
-  def destroy 
-     session[:login_uid].clear
-     render :login
+  def logout 
+     session.delete(:login_uid)
+     redirect_to root_path
   end
 end
