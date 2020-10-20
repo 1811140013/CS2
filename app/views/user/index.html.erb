@@ -1,0 +1,5 @@
+<% if @user.present? %>
+<% @user.each do |user| %>
+<p>会員id:<%=user.uid %></p>
+<% end %>
+<% end %>
