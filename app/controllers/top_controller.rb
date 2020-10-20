@@ -9,7 +9,8 @@ class TopController < ApplicationController
   
   
   def login
-    if u = User.find_by(params[:uid]) and BCrypt::Password.new(u.pass) == params[:pass]
+    if User.find_by(uid: params[:uid]) 
+      u = User.find_by(uid: params[:uid]) and BCrypt::Password.new(u.pass) == params[:pass]
        session[:login_uid]=params[:uid]
        redirect_to root_path
     else
